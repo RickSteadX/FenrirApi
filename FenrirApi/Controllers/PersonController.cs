@@ -47,10 +47,10 @@ namespace FenrirApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = person.Id }, person);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(Guid id, Person person)
+        [HttpPut]
+        public IActionResult Update([FromQuery] Guid Id, Person person)
         {
-            if (id != person.Id)
+            if (Id != person.Id)
             {
                 return BadRequest();
             }
@@ -61,10 +61,10 @@ namespace FenrirApi.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        [HttpDelete]
+        public IActionResult Delete([FromQuery] Guid Id)
         {
-            var person = _personRepository.GetById(id);
+            var person = _personRepository.GetById(Id);
 
             if (person == null)
             {
